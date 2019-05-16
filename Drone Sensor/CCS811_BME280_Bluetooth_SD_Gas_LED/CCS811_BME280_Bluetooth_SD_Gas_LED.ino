@@ -10,25 +10,30 @@ FaBoGas ccs811;
 BME280 bme280;
 SoftwareSerial BTserial(10, 9); // RX | TX
 
-int counter = 0;
+int Counter = 0;
 
 int sensor_val[2];
 
 int red = 8;
 int yellow = 7;
 int green = 6;
-
-int delaytime = 200;
 bool FirstTime = true;
 
 int chipSelect = 4; //chip select pin for the MicroSD Card Adapter
-File file; // file object that is used to read and write data
+//File file; // file object that is used to read and write data
 File excel; // file object that is used to read and write data
 
-int humidity;
-int pressure;
-int altitude;
-int temperature;
+char filename[] = "LOGGER00.txt";
+
+#define seconds() (millis()/1000 % 60)
+#define minutes() (millis()/1000/60 % 60)
+#define hours()   (millis()/1000/60/60)
+
+char Time[17];
+char counter[10];
+char co2[10];
+char tvoc[10];
+char AirQua[10];
 
 void setup() {
 
@@ -36,10 +41,19 @@ void setup() {
   pinMode(yellow, OUTPUT);
   pinMode(green, OUTPUT);
 
+  digitalWrite(yellow, HIGH);
+
   Serial.begin(9600);
-  while (!Serial) { }
+  while (!Serial) {
+    digitalWrite(red, HIGH);
+    delay(1000);
+  }
   Serial.println("Serial Started");
   BTserial.begin(9600);
+  while (!BTserial) {
+    digitalWrite(red, HIGH);
+    delay(1000);
+  }
   Serial.println("Bluetooth Started");
   while (!ccs811.begin())
   {
@@ -61,7 +75,6 @@ void setup() {
 
 
   // SD setup
-
   pinMode(chipSelect, OUTPUT); // chip select pin must be set to OUTPUT mode
   while (!SD.begin(chipSelect)) { // Initialize SD card
     Serial.println("Could not initialize SD card."); // if return value is false, something went wrong.
@@ -69,81 +82,79 @@ void setup() {
     delay(1000);
   }
   Serial.println("SD Card Initialized");
-  //
-  //  if (SD.exists("ReadableData.txt")) { // if "file.txt" exists, fill will be deleted
-  //    Serial.println("ReadableData File exists.");
-  //    //            if (SD.remove("file.txt") == true) {
-  //    //              Serial.println("Successfully removed file.");
-  //    //            } else {
-  //    //              Serial.println("Could not removed file.");
-  //    //            }
-  //  }
-  //
-  //  if (SD.exists("ExcelData.txt")) { // if "file.txt" exists, fill will be deleted
-  //    Serial.println("ExcelData File exists.");
-  //    //            if (SD.remove("file.txt") == true) {
-  //    //              Serial.println("Successfully removed file.");
-  //    //            } else {
-  //    //              Serial.println("Could not removed file.");
-  //    //            }
-  //  }
-  //End of SD setup
 }
 
 void loop() {
   if (FirstTime) {
-    //SDRead();
+    digitalWrite(green, HIGH);
+    digitalWrite(yellow, LOW);
+    OpenNewFile();
     FirstTime = false;
   }
 
   if ( ccs811.checkStatus()) {
     ccs811.getAlgResultsData(sensor_val);
+    sprintf(Time, "%02d:%02d:%02d", (int)hours(), (int)minutes(), (int)seconds());
+    sprintf(counter, "%05d", (int)Counter);
+    sprintf(co2, "%05d", (int)sensor_val[0]);
+    sprintf(tvoc, "%04d", (int)sensor_val[1]);
+    sprintf(AirQua, "%03d", (int)analogRead(0));
 
-    humidity = (int((bme280.readFloatHumidity(), 0)));
-    pressure = (int((bme280.readFloatPressure(), 0)));
-    altitude = (int((bme280.readFloatAltitudeMeters(), 1)));
-    temperature = (int((bme280.readTempC(), 2)));
-    
-    //PrintEverything();
     PrintBluetooth();
 
-    SDWrite();
-    //SDPlot();
+    SDPrint(1); // 1 for excel, anything else for readable
+    //PrintEverything();
+
+    Counter++;
   }
 
   delay(10);
 }
 
-void SDRead() {
-  file = SD.open("file.txt", FILE_READ); // open "file.txt" to read data
-  if (file) {
-    Serial.println("--- Reading start ---");
-    char character;
-    while ((character = file.read()) != -1) { // this while loop reads data stored in "file.txt" and prints it to serial monitor
-      Serial.print(character);
+void OpenNewFile() {
+  strncpy(filename, "LOGGER00.txt", 20);
+  for (uint8_t i = 0; i < 100; i++) {
+    filename[6] = i / 10 + '0';
+    filename[7] = i % 10 + '0';
+    if (! SD.exists(filename)) {
+      // only open a new file if it doesn't exist
+      //excel = SD.open(filename, FILE_WRITE);
+      Serial.print(filename);
+      Serial.println(" found");
+      break;  // leave the loop!
     }
-    file.close();
-    Serial.println("--- Reading end ---");
-  } else {
-    Serial.println("Could not open file (reading).");
   }
 }
 
 void PrintBluetooth() {
 
+  BTserial.print(filename);
+  BTserial.print(",");
+
   BTserial.print(counter);
   BTserial.print(",");
 
-  BTserial.print(sensor_val[0]); // CO2
+  BTserial.print(Time);
+  BTserial.print(",");
+
+  BTserial.print(co2); // CO2
   BTserial.print(" ppm");
   BTserial.print(",");
 
-  BTserial.print(sensor_val[1]); // TVOC
+  BTserial.print(tvoc); // TVOC
   BTserial.print(" ppb");
+  BTserial.print(",");
+
+  BTserial.print(AirQua); // Air Quality
+  BTserial.print(" ppm");
   BTserial.print(",");
 
   BTserial.print(bme280.readFloatHumidity(), 0);
   BTserial.print("%");
+  BTserial.print(",");
+
+  BTserial.print(bme280.readTempC(), 2);
+  BTserial.print(" C");
   BTserial.print(",");
 
   BTserial.print(bme280.readFloatPressure(), 0);
@@ -152,191 +163,147 @@ void PrintBluetooth() {
 
   BTserial.print(bme280.readFloatAltitudeMeters(), 1);
   BTserial.print(" m");
-  BTserial.print(",");
-
-  BTserial.print(bme280.readTempC(), 2);
-  BTserial.print(" C");
-  BTserial.print(",");
-
-  BTserial.print(analogRead(2));
-  BTserial.print(" ppm");
   BTserial.print(";");
-}
-
-
-void SDWrite() {
-
-  file = SD.open("file.txt", FILE_WRITE); // open "file.txt" to write data
-  if (file) {
-
-    file.write("Sample No. ");
-    file.write(counter);
-    file.write(": ");
-
-    file.write(" CO2: ");
-    file.write(sensor_val[0]);
-    file.write(" ppm ");
-
-    file.write(" TVOC: ");
-    file.write(sensor_val[1]);
-    file.write(" ppb ");
-
-    file.write(" Humidity: ");
-    file.write(humidity);
-    file.write(" % ");
-
-    file.write(" Pressure: ");
-    file.write(pressure);
-    file.write(" Pa ");
-
-    file.write(" Altitude: ");
-    file.write(altitude);
-    file.write(" m ");
-
-    file.write(" Temperature: ");
-    file.write(temperature);
-    file.write(" C ");
-
-    file.write(" Air Quality: ");
-    file.write(analogRead(0));
-    file.write(" ppm ");
-
-    file.write('/n');
-
-    file.close(); // close file
-    Serial.println("Wrote on SD card"); // debug output: show written number in serial monitor
-  } else {
-    Serial.println("Could not open file (writing).");
-    file.close(); // close file
-  }
-}
-
-
-void SDPlot() {
-  excel = SD.open("excel.txt", FILE_WRITE); // open "file.txt" to write data
-  if (excel) {
-    SDPlotSensors();
-    excel.close(); // close file
-    Serial.println("Wrote on SD card"); // debug output: show written number in serial monitor
-  } else {
-    Serial.println("Could not open file (writing).");
-    excel.close(); // close file
-  }
 }
 
 void SDPrintSensors() {
 
-  file.print("Sample No.");
-  file.print(counter);
-  file.print(": ");
+  excel.print("File Name: ");
+  excel.print(filename);
 
-  file.print(" CO2: ");
-  file.print(sensor_val[0]);
-  file.print(" ppm ");
-
-  file.print(" TVOC: ");
-  file.print(sensor_val[1]);
-  file.print(" ppb ");
-
-  file.print(" Humidity: ");
-  file.print(bme280.readFloatHumidity(), 0);
-  file.print(" % ");
-
-  file.print(" Pressure: ");
-  file.print(bme280.readFloatPressure(), 0);
-  file.print(" Pa ");
-
-  file.print(" Altitude: ");
-  file.print(bme280.readFloatAltitudeMeters(), 1);
-  file.print(" m ");
-
-  file.print(" Temperature: ");
-  file.print(bme280.readTempC(), 2);
-  file.print(" C ");
-
-  file.print(" Air Quality: ");
-  file.print(analogRead(0));
-  file.print(" ppm ");
-
-  file.println();
-}
-
-
-void SDPlotSensors() {
-
+  excel.print(" Sample No.");
   excel.print(counter);
 
-  excel.print(sensor_val[0]); //CO2
+  excel.print(" Recorded after ");
+  excel.print(Time);
+  excel.print(": ");
+
+  excel.print(" CO2: ");
+  excel.print(co2);
   excel.print(" ppm ");
 
-  excel.print(sensor_val[1]); //TVOC
+  excel.print(" TVOC: ");
+  excel.print(tvoc);
   excel.print(" ppb ");
 
+  excel.print(" Air Quality: ");
+  excel.print(AirQua);
+  excel.print(" ppm ");
+
+  excel.print(" Humidity: ");
   excel.print(bme280.readFloatHumidity(), 0);
   excel.print(" % ");
 
-  excel.print(bme280.readFloatPressure(), 0);
-  excel.print(" Pa ");
-
-  excel.print(bme280.readFloatAltitudeMeters(), 1);
-  excel.print(" m ");
-
+  excel.print(" Temperature: ");
   excel.print(bme280.readTempC(), 2);
   excel.print(" C ");
 
-  excel.print(analogRead(0));
-  excel.print(" ppm ");
+  excel.print(" Pressure: ");
+  excel.print(bme280.readFloatPressure(), 0);
+  excel.print(" Pa ");
+
+  excel.print(" Altitude: ");
+  excel.print(bme280.readFloatAltitudeMeters(), 1);
+  excel.print(" m");
+
+  excel.println();
+}
+
+void SDPrint(int a) {
+  excel = SD.open(filename, FILE_WRITE); // open "file.txt" to write data
+  if (excel) {
+    if (a == 1)
+    {
+      SDPlotSensors();
+    }
+    else
+    {
+      SDPrintSensors();
+    }
+    excel.close(); // close file
+    Serial.println("Wrote on SD card");
+    ControlLED();
+  } else {
+    Serial.println("Could not open file (writing).");
+    digitalWrite(red, HIGH);
+    excel.close(); // close file
+  }
+}
+
+void SDPlotSensors() {
+
+  excel.print(filename);
+  excel.print(",");
+
+  excel.print(counter);
+  excel.print(",");
+
+  excel.print(Time);
+  excel.print(",");
+
+  excel.print(co2); //CO2
+  excel.print(",");
+
+  excel.print(tvoc); //TVOC
+  excel.print(",");
+
+  excel.print(AirQua);
+  excel.print(",");
+
+  excel.print(bme280.readFloatHumidity(), 0);
+  excel.print(",");
+
+  excel.print(bme280.readTempC(), 2);
+  excel.print(",");
+
+  excel.print(bme280.readFloatPressure(), 0);
+  excel.print(",");
+
+  excel.print(bme280.readFloatAltitudeMeters(), 1);
 
   excel.println();
 }
 
 void ControlLED() {
 
-  for (int i = 6; i <= 8; i ++) {
+  for (int i = 9; i >= 6; i --) {
     digitalWrite(i, LOW);
-    digitalWrite(i + 1, HIGH);
+    digitalWrite(i - 1, HIGH);
+    delay(100);
   }
-
-  //  switch (LEDState) {
-  //    case 0:
-  //      digitalWrite(green, HIGH);
-  //      break;
-  //
-  //    case 1:
-  //      digitalWrite(green, HIGH);
-  //      digitalWrite(red, HIGH);
-  //      break;
-  //
-  //    default:
-  //      ClearLEDS();
-  //      digitalWrite(red, HIGH);
-  //      break;
-  //  }
-}
-
-void ClearLEDS() {
-  digitalWrite(green, LOW);
-  digitalWrite(yellow, LOW);
-  digitalWrite(red, LOW);
 }
 
 void PrintEverything() {
 
-  Serial.print("Sample No.");
+  Serial.print("File Name: ");
+  Serial.print(filename);
+
+  Serial.print(" Sample No.");
   Serial.print(counter);
+
+  Serial.print(" Recorded after ");
+  Serial.print(Time);
   Serial.print(": ");
 
   Serial.print(" CO2: ");
-  Serial.print(sensor_val[0]);
+  Serial.print(co2);
   Serial.print(" ppm ");
 
   Serial.print(" TVOC: ");
-  Serial.print(sensor_val[1]);
+  Serial.print(tvoc);
   Serial.print(" ppb ");
+
+  Serial.print(" Air Quality: ");
+  Serial.print(AirQua);
+  Serial.print(" ppm ");
 
   Serial.print(" Humidity: ");
   Serial.print(bme280.readFloatHumidity(), 0);
   Serial.print(" % ");
+
+  Serial.print(" Temperature: ");
+  Serial.print(bme280.readTempC(), 2);
+  Serial.print(" C ");
 
   Serial.print(" Pressure: ");
   Serial.print(bme280.readFloatPressure(), 0);
@@ -344,19 +311,7 @@ void PrintEverything() {
 
   Serial.print(" Altitude: ");
   Serial.print(bme280.readFloatAltitudeMeters(), 1);
-  Serial.print(" m ");
-
-  Serial.print(" Temperature: ");
-  Serial.print(bme280.readTempC(), 2);
-  Serial.print(" C ");
-
-  Serial.print("Air Quality: ");
-  Serial.print(analogRead(0));
-  Serial.print(" ppm ");
+  Serial.print(" m");
 
   Serial.println();
-
-  counter++;
-
-  ControlLED();
 }
