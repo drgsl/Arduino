@@ -1,0 +1,4 @@
+1 - blink led
+2 - print to serial
+3 - get 1/0 to turn on/off led
+4 - get value from 0 - 255 and pass it to led

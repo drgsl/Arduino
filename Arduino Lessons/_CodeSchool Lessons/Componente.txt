@@ -1,0 +1,28 @@
+	arduino
+	breadboard 1/2
+	breadboard 830 pcte
+	butoane
+	fotorezistori
+	buzzer activ
+	led rgb anod comun
+	potentiometer 50k
+	ultrasonic hc sr04
+	temp & humid DHT11
+	IR Receiver & transmitter
+	colored leds
+	rezistente
+	
+	potentiometer
+	buzzer activ
+	buzzer pasiv
+	74hc595n
+	infrared sensor
+	lm35dz temperature sensor
+	senzor flacara
+	intrerupator rotativ
+	butoane
+	telecomanda ir
+	display led 1 digit
+	display led 8 digit
+	8*8 matrix
+	rgb led

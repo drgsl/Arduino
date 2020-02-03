@@ -1,0 +1,5 @@
+1 - blink
+2 - 2 leds - police light
+3 - 3 leds - police light - middle corners 
+4 - (at least 3 leds) from first to last & from last to first - Turn just one led on
+5 - (at least 3 leds) from first to last & from last to first - Turn on than turn off

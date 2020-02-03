@@ -1,0 +1,10 @@
+1 - blink led
+2 - button led (lantern)
+3 - photores led
+4 - button buzzer (alarm)
+5 - Led with pot (main light)
+6 - RGB Led (desk light) - function rgb
+
+4 - DHT 22
+5 - DHT 22 & leds
+6 - DHT 22 & leds & buzzer

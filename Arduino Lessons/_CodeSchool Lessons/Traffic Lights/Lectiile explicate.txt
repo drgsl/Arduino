@@ -1,0 +1,39 @@
+I - 	Care este placuta arduino
+	Ce se poate face cu arduino
+	Arduino-ul stie sa faca 3 lucruri foarte importante: Sa primeasca informatie, sa proceseze informatie si sa trimita informatie
+	Pinii arduino-ului ( unde sunt intrarile unde sunt iesirile )
+	Ce e ala breadboard
+	Vrem sa facem un semafor inteligent
+	incepem un indicatorul de verde intermitent
+	Incep sa faca schema ( 1 culoare )
+	Punem programul daca nu e deja instalat
+	Scriem codul 
+
+II - 	incepem sa conturam un semafor
+	prima schema ( doar 2 culori ) 
+	primul cod
+	a 2a schema ( 3 culori ) 
+	vad daca intuiesc ce trebuie modificat cand adaugam un led nou
+	al doilea cod
+
+III - 	repetam functiile arduino ului
+	pana acum am avut doar iesiri
+	prima intrare
+	schema pentru test buton
+	cod 1
+	analizam output ul butonului 
+	butonul poate fi doar in 2 moduri: apasat sau  neapasat
+	cod 2
+
+IV - 	a2a intrare pe care o facem
+	diferita de buton pentru ca poate fi oriunde intre 0 - 1024 in functie de intensitatea luminii din camera
+	schema
+	cod 1 
+	analizam output ul
+	cod 2
+
+V - 	semafoarele inteligente au introdus un difuzor pentru persoanele cu dizabilitati sa stie cand au voie sa treaca
+	o alta iesire
+	schema pentru test
+	cod 1
+	cod 2
