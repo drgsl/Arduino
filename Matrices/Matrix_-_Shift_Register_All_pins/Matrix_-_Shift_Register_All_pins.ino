@@ -13,16 +13,16 @@ byte key_value = 0; //unsigned long key_value = 0;
 
 byte leds = 0;
 
-int ledarray[5][4] = { {0, 1, 2 , 3}, { -8, -7, -6, -5}, { -4, -3, -2, -1}, {8, 9, 10, 11}, {12, 14, 15, 16}};
+const int ledarray[5][4] = { {0, 1, 2 , 3}, { -8, -7, -6, -5}, { -4, -3, -2, -1}, {8, 9, 10, 11}, {12, 14, 15, 16}};
 //= { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 
 bool LedState[5][4];
 bool Finished = false;
 
 byte AnimSpeed = 100;
-byte SpeedIncrement = 20;
+const byte SpeedIncrement = 20;
 
-byte AnimMax = 40;
+const byte AnimMax = 40;
 
 char buf[25];
 
@@ -32,7 +32,9 @@ byte AnimIndex;
 byte LastAnimIndex;
 
 byte DurationIndex = 0;
-byte TotalDuration = 100;
+const byte TotalDuration = 100;
+
+bool ToBeOn = true;
 
 struct RainDrop {
   float spd = 0;
@@ -80,81 +82,82 @@ void loop() {
     switch (AnimIndex) {
       case 0:
         Heart1(AnimSpeed);
+        ToBeOn = false;
         break;
       case 1:
-        Heart2(AnimSpeed);
+        Heart2(AnimSpeed);         ToBeOn = false;
         break;
       case 2:
-        Snake1(AnimSpeed);
+        Snake1(AnimSpeed);         ToBeOn = false;
         break;
       case 3:
-        Snake2(AnimSpeed);
+        Snake2(AnimSpeed);         ToBeOn = false;
         break;
       case 4:
-        Snake3(AnimSpeed);
+        Snake3(AnimSpeed);         ToBeOn = false;
         break;
       case 5:
-        Snake4(AnimSpeed);
+        Snake4(AnimSpeed);         ToBeOn = false;
         break;
       case 6:
-        Snake5(AnimSpeed);
+        Snake5(AnimSpeed);         ToBeOn = false;
         break;
       case 7:
-        Snake6(AnimSpeed);
+        Snake6(AnimSpeed);         ToBeOn = false;
         break;
       case 8:
-        Snake7(AnimSpeed);
+        Snake7(AnimSpeed);         ToBeOn = false;
         break;
       case 9:
-        Snake8(AnimSpeed);
+        Snake8(AnimSpeed);         ToBeOn = false;
         break;
 
       case 10:
         StartRgb();
-        Diagonals0(AnimSpeed);
+        Diagonals0(AnimSpeed);         ToBeOn = false;
         break;
       case 11:
         StartRgb();
-        Diagonals1(AnimSpeed);
+        Diagonals1(AnimSpeed);         ToBeOn = false;
         break;
-      case 12:
-        StartRgb();
-        Diagonals2(AnimSpeed);
-        Diagonals3(AnimSpeed);
-        ChooseRandomClean(AnimSpeed);
-        break;
-      case 13:
-        StartRgb();
-        Diagonals4(AnimSpeed);
-        Diagonals5(AnimSpeed);
-        DifDiag(0, true, 0);
-        ChooseRandomClean(AnimSpeed);
-        break;
-      case 14:
-        StartRgb();
-        Diagonals4(AnimSpeed);
-        DifDiag(0, true, 0);
-        delay(AnimSpeed);
-        Diagonals6(AnimSpeed);
-        ChooseRandomClean(AnimSpeed);
-        break;
-      case 15:
-        StartRgb();
-        Diagonals8(AnimSpeed);
-        delay(AnimSpeed);
-        DifDiag(0, true, 0);
-        delay(AnimSpeed);
-        Diagonals7(AnimSpeed);
-        ChooseRandomClean(AnimSpeed);
-        break;
-      case 16:
-        while (DurationIndex != TotalDuration)
-        {
-          Rain(AnimSpeed);
-          DurationIndex++;
-        }
-        DurationIndex = 0;
-        break;
+//      case 12:
+//        StartRgb();
+//        Diagonals2(AnimSpeed);         ToBeOn = false;
+//        Diagonals3(AnimSpeed);         ToBeOn = false;
+//        ChooseRandomClean(AnimSpeed);         ToBeOn = false;
+//        break;
+//      case 13:
+//        StartRgb();
+//        Diagonals4(AnimSpeed);         ToBeOn = false;
+//        Diagonals5(AnimSpeed);
+//        DifDiag(0, true, 0);
+//        ChooseRandomClean(AnimSpeed);
+//        break;
+//      case 14:
+//        StartRgb();
+//        Diagonals4(AnimSpeed);
+//        DifDiag(0, true, 0);
+//        delay(AnimSpeed);
+//        Diagonals6(AnimSpeed);
+//        ChooseRandomClean(AnimSpeed);
+//        break;
+//      case 15:
+//        StartRgb();
+//        Diagonals8(AnimSpeed);
+//        delay(AnimSpeed);
+//        DifDiag(0, true, 0);
+//        delay(AnimSpeed);
+//        Diagonals7(AnimSpeed);
+//        ChooseRandomClean(AnimSpeed);
+//        break;
+//      case 16:
+//        while (DurationIndex != TotalDuration)
+//        {
+//          Rain(AnimSpeed);
+//          DurationIndex++;
+//        }
+//        DurationIndex = 0;
+//        break;
 
       //      case 17:
       //        CreepyFace2(AnimSpeed / 4);
@@ -168,56 +171,56 @@ void loop() {
       //        Heart3(AnimSpeed);
       //        break;
       case 20:
-        Heart4(AnimSpeed);
+        Heart4(AnimSpeed);         ToBeOn = false;
         break;
       case 21:
-        Heart5(AnimSpeed);
+        Heart5(AnimSpeed);         ToBeOn = false;
         break;
 
       case 22:
-        Spiral1(AnimSpeed);
+        Spiral1(AnimSpeed);         ToBeOn = false;
         break;
       case 23:
-        Spiral2(AnimSpeed);
+        Spiral2(AnimSpeed);         ToBeOn = false;
         break;
       case 24:
-        Spiral3(AnimSpeed);
+        Spiral3(AnimSpeed);         ToBeOn = false;
         break;
       case 25:
-        Spiral4(AnimSpeed);
+        Spiral4(AnimSpeed);         ToBeOn = false;
         break;
       case 26:
-        Spiral5(AnimSpeed);
+        Spiral5(AnimSpeed);         ToBeOn = false;
         break;
       case 27:
-        Spiral6(AnimSpeed);
+        Spiral6(AnimSpeed);         ToBeOn = false;
         break;
       case 28:
-        Spiral7(AnimSpeed);
+        Spiral7(AnimSpeed);         ToBeOn = false;
         break;
       case 29:
-        Spiral8(AnimSpeed);
+        Spiral8(AnimSpeed);         ToBeOn = false;
         break;
       case 30:
-        Spiral9(AnimSpeed);
+        Spiral9(AnimSpeed);         ToBeOn = false;
         break;
       case 31:
-        Spiral10(AnimSpeed);
+        Spiral10(AnimSpeed);         ToBeOn = false;
         break;
       case 32:
-        Spiral11(AnimSpeed);
+        Spiral11(AnimSpeed);         ToBeOn = false;
         break;
       case 33:
-        Spiral12(AnimSpeed);
+        Spiral12(AnimSpeed);         ToBeOn = false;
         break;
       case 34:
-        Spiral13(AnimSpeed);
+        Spiral13(AnimSpeed);         ToBeOn = false;
         break;
       case 35:
-        Spiral14(AnimSpeed);
+        Spiral14(AnimSpeed);         ToBeOn = false;
         break;
       case 36:
-        Spiral15(AnimSpeed);
+        Spiral15(AnimSpeed);         ToBeOn = false;
         break;
       default:
         AnimIndex = random(AnimMax);
@@ -233,6 +236,7 @@ void loop() {
 }
 
 //Rain
+/*
 void Rain(int DelaySpeed) {
   switch (random(4)) {
 
@@ -268,89 +272,7 @@ void ShowRain(RainDrop & raindrop) {
 void ClearRain(RainDrop & raindrop) {
   TurnOff(ledarray[raindrop.y][raindrop.x]);
 }
-
-void UltraSmartRandomWrite(int DelaySpeed){
-  
-int x = random(0);
-int y  = random(0);
-
-while(1){
-  if(random(2)){ 
-    if( x = 3 ) x--; 
-    if(x = 1) x++;
-      else   
-        if(random(2)) x++;
-        else x--;
-  }
-  else 
-    if( y = 4 ) y--; 
-    if(y = 1) y++;
-      else   
-        if(random(2)) y++;
-        else y--;
-  
-  delay(DelaySpeed);
-    TurnOn(ledarray[y][x]);
-}
-}
-
-void SmartRandomWrite(int DelaySpeed){
-  int x = random(5);
-  int y = random(4);
-
-  Finished = true;
-  
-  if(!LedState[x][y]){
-    TurnOn(ledarray[x][y]);
-    delay(DelaySpeed);
-    LedState[x][y] = true;
-  }
-
- for (int i = 0; i <= 4; i++) {
-    for (int j = 0; j <= 3; j ++) {
-  if(!LedState[i][j]){
-      Finished = false;
-  }
-    }
-    }
-  if(Finished)
-  SmartRandomClean(DelaySpeed);
-  else
-  SmartRandomWrite(DelaySpeed);
-}
-void SmartRandomClean(int DelaySpeed){
-  int x = random(5);
-  int y = random(4);
-
-  Finished = true;
-  
-  if(LedState[x][y]){
-    TurnOff(ledarray[x][y]);
-    delay(DelaySpeed);
-    LedState[x][y] = false;
-  }
-
- for (int i = 0; i <= 4; i++) {
-    for (int j = 0; j <= 3; j ++) {
-  if(LedState[i][j]){
-      Finished = false;
-  }
-    }
-    }
-  if(Finished)
-  SmartRandomWrite(DelaySpeed);
-  else
-  SmartRandomClean(DelaySpeed);
-}
-
-void CompleteRandom() {
-  if (random(2) == 1)
-    TurnOn(ledarray[random(5)][random(4)]);
-  else
-    TurnOff(ledarray[random(5)][random(4)]);
-  delay(AnimSpeed / 10);
-  CompleteRandom();
-}
+*/
 
 //Diagonals
 void Diagonals0(int DelaySpeed) {
@@ -540,106 +462,106 @@ void DifDiag(int diff, bool isON, int part) {
 
 //Stuff
 void ChooseRandomClean(int DelaySpeed) {
-  switch (random(30)) {
-    case 0:
-      Spiral1Clean(DelaySpeed);
-      break;
-    case 1:
-      Spiral2Clean(DelaySpeed);
-      break;
-    case 2:
-      Spiral3Clean(DelaySpeed);
-      break;
-    case 3:
-      Spiral4Clean(DelaySpeed);
-      break;
-    case 4:
-      Spiral5Clean(DelaySpeed);
-      break;
-    case 5:
-      Spiral6Clean(DelaySpeed);
-      break;
-    case 6:
-      Spiral7Clean(DelaySpeed);
-      break;
-    case 7:
-      Spiral8Clean(DelaySpeed);
-      break;
-    case 8:
-      Spiral9Clean(DelaySpeed);
-      break;
-    case 9:
-      Spiral10Clean(DelaySpeed);
-      break;
-    case 10:
-      Spiral11Clean(DelaySpeed);
-      break;
-    case 11:
-      Spiral12Clean(DelaySpeed);
-      break;
-    case 12:
-      Spiral13Clean(DelaySpeed);
-      break;
-    case 13:
-      Spiral14Clean(DelaySpeed);
-      break;
-    case 14:
-      Spiral15Clean(DelaySpeed);
-      break;
-    case 15:
-      Snake1Clean(DelaySpeed);
-      break;
-    case 16:
-      Snake2Clean(DelaySpeed);
-      break;
-    case 17:
-      Snake3Clean(DelaySpeed);
-      break;
-    case 18:
-      Snake4Clean(DelaySpeed);
-      break;
-    case 19:
-      Snake5Clean(DelaySpeed);
-      break;
-    case 20:
-      Snake6Clean(DelaySpeed);
-      break;
-    case 21:
-      Snake7Clean(DelaySpeed);
-      break;
-    case 22:
-      Snake8Clean(DelaySpeed);
-      break;
-    case 23:
-      Spiral9Clean(DelaySpeed);
-      break;
-    case 24:
-      Diagonals0Clean(DelaySpeed);
-      break;
-    case 25:
-      Diagonals1Clean(DelaySpeed);
-      break;
-    case 26:
-      Diagonals2Clean(AnimSpeed);
-      Diagonals3Clean(AnimSpeed);
-      break;
-    case 27:
-      Diagonals4Clean(AnimSpeed);
-      Diagonals5Clean(AnimSpeed);
-      delay(AnimSpeed);
-      DifDiag(0, false, 0);
-      break;
-    case 28:
-      Diagonals6Clean(AnimSpeed);
-      delay(AnimSpeed);
-      DifDiag(0, false, 0);
-      Diagonals7Clean(AnimSpeed);
-      break;
-    case 29:
-      Diagonals4Clean(AnimSpeed);
-      Diagonals0Clean(AnimSpeed);
-      break;
-  }
+//  switch (random(30)) {
+//    case 0:
+//      Spiral1Clean(DelaySpeed);
+//      break;
+//    case 1:
+//      Spiral2Clean(DelaySpeed);
+//      break;
+//    case 2:
+//      Spiral3Clean(DelaySpeed);
+//      break;
+//    case 3:
+//      Spiral4Clean(DelaySpeed);
+//      break;
+//    case 4:
+//      Spiral5Clean(DelaySpeed);
+//      break;
+//    case 5:
+//      Spiral6Clean(DelaySpeed);
+//      break;
+//    case 6:
+//      Spiral7Clean(DelaySpeed);
+//      break;
+//    case 7:
+//      Spiral8Clean(DelaySpeed);
+//      break;
+//    case 8:
+//      Spiral9Clean(DelaySpeed);
+//      break;
+//    case 9:
+//      Spiral10Clean(DelaySpeed);
+//      break;
+//    case 10:
+//      Spiral11Clean(DelaySpeed);
+//      break;
+//    case 11:
+//      Spiral12Clean(DelaySpeed);
+//      break;
+//    case 12:
+//      Spiral13Clean(DelaySpeed);
+//      break;
+//    case 13:
+//      Spiral14Clean(DelaySpeed);
+//      break;
+//    case 14:
+//      Spiral15Clean(DelaySpeed);
+//      break;
+//    case 15:
+//      Snake1Clean(DelaySpeed);
+//      break;
+//    case 16:
+//      Snake2Clean(DelaySpeed);
+//      break;
+//    case 17:
+//      Snake3Clean(DelaySpeed);
+//      break;
+//    case 18:
+//      Snake4Clean(DelaySpeed);
+//      break;
+//    case 19:
+//      Snake5Clean(DelaySpeed);
+//      break;
+//    case 20:
+//      Snake6Clean(DelaySpeed);
+//      break;
+//    case 21:
+//      Snake7Clean(DelaySpeed);
+//      break;
+//    case 22:
+//      Snake8Clean(DelaySpeed);
+//      break;
+//    case 23:
+//      Spiral9Clean(DelaySpeed);
+//      break;
+//    case 24:
+//      Diagonals0Clean(DelaySpeed);
+//      break;
+//    case 25:
+//      Diagonals1Clean(DelaySpeed);
+//      break;
+//    case 26:
+//      Diagonals2Clean(AnimSpeed);        
+//      Diagonals3Clean(AnimSpeed);
+//      break;
+//    case 27:
+//      Diagonals4Clean(AnimSpeed);
+//      Diagonals5Clean(AnimSpeed);
+//      delay(AnimSpeed);
+//      DifDiag(0, false, 0);
+//      break;
+//    case 28:
+//      Diagonals6Clean(AnimSpeed);
+//      delay(AnimSpeed);
+//      DifDiag(0, false, 0);
+//      Diagonals7Clean(AnimSpeed);
+//      break;
+//    case 29:
+//      Diagonals4Clean(AnimSpeed);
+//      Diagonals0Clean(AnimSpeed);
+//      break;
+//  }
 }
 void(* resetFunc) (void) = 0;//declare reset function at address 0
 void ReadIR() {
@@ -657,7 +579,7 @@ void ReadIR() {
         break;
       case 0xFFE21D:
         //Serial.println("Func / Stop");
-        UltraSmartRandomWrite(AnimSpeed);
+        //UltraSmartRandomWrite(AnimSpeed);
         break;
       case 0xFF22DD:
         //Serial.println("|<<");
@@ -673,33 +595,33 @@ void ReadIR() {
         //Serial.println(" - ");
         if (AnimSpeed > SpeedIncrement)
           AnimSpeed -= SpeedIncrement;
-        CheckSpeed(AnimSpeed);
+        //CheckSpeed(AnimSpeed);
         break ;
       case 0xFFA857:
         //Serial.println("Vol - ");
         break ;
       case 0xFF906F:
         //Serial.println(" + ");
-        if (AnimSpeed < 20 * SpeedIncrement)
+        if (AnimSpeed < 100 * SpeedIncrement)
           AnimSpeed += SpeedIncrement;
-        CheckSpeed(AnimSpeed);
+        //CheckSpeed(AnimSpeed);
         break ;
       case 0xFF9867:
         //Serial.println(" EQ ");
-        CompleteRandom();
+        //CompleteRandom();
         //        while (1)
         //          CreepyFace(AnimSpeed);
         break ;
       case 0xFFB04F:
         //Serial.println(" St / Rept ");
-        SmartRandomWrite(AnimSpeed);
+        //SmartRandomWrite(AnimSpeed);
         break ;
       case 0xFF6897:
         //Serial.println("0");
-        WriteSentence(Sentences[0]);
+        //WriteSentence(Sentences[0]);
       case 0xFF30CF:
         //Serial.println("1");
-        WriteSentence(Sentences[1]);
+        //WriteSentence(Sentences[1]);
         break ;
       case 0xFF18E7:
         //Serial.println("2");
@@ -751,11 +673,11 @@ void StartRgb() {
   }
 }
 void CleanScreen() {
-  for (int i = 0; i <= 4; i++) {
-    for (int j = 0; j <= 3; j ++) {
-      TurnOff(ledarray[i][j]);
-    }
-  }
+//  for (int i = 0; i <= 4; i++) {
+//    for (int j = 0; j <= 3; j ++) {
+//      TurnOff(ledarray[i][j]);
+//    }
+//  }
 }
 void FillScreen() {
   for (int i = 0; i <= 4; i++) {
@@ -785,6 +707,14 @@ void updateShiftRegister() {
   shiftOut(dataPin, clockPin, LSBFIRST, leds);
   digitalWrite(latchPin, HIGH);
 }
+
+void TurnOnOff(int n){
+  if(ToBeOn)
+  TurnOn(n);
+  else
+  TurnOff(n);
+}
+
 void TurnOn(int n) {
   CheckForChanges();
   if (n < 0) {
@@ -893,16 +823,15 @@ void CheckSpeed(int value) {
 
 //Snake
 void Snake1(int DelaySpeed) {
-  CleanScreen();
   for (int i = 0; i <= 4; i++) {
     if ( i % 2 == 0) {
       for (int j = 3; j >= 0; j --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int j = 0; j <= 3; j ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -930,12 +859,12 @@ void Snake2(int DelaySpeed) {
   for (int j = 3; j >= 0; j--) {
     if ( j % 2 == 0) {
       for (int i = 4; i >= 0; i --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int i = 0; i <= 4; i ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -963,12 +892,12 @@ void Snake3(int DelaySpeed) {
   for (int i = 0; i <= 4; i++) {
     if ( i % 2 == 0) {
       for (int j = 0; j <= 4; j ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int j = 4; j >= 0; j --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -996,12 +925,12 @@ void Snake4(int DelaySpeed) {
   for (int j = 0; j <= 3; j++) {
     if ( j % 2 == 0) {
       for (int i = 0; i <= 4; i ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int i = 4; i >= 0 ; i --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -1029,12 +958,12 @@ void Snake5(int DelaySpeed) {
   for (int i = 4; i >= 0 ; i--) {
     if ( i % 2 == 0) {
       for (int j = 3; j >= 0; j --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int j = 0; j <= 3; j ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -1062,12 +991,12 @@ void Snake6(int DelaySpeed) {
   for (int j = 3; j >= 0; j--) {
     if ( j % 2 == 0) {
       for (int i = 0; i <= 4; i ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int i = 4; i >= 0; i --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -1095,12 +1024,12 @@ void Snake7(int DelaySpeed) {
   for (int j = 0; j <= 3; j++) {
     if ( j % 2 == 0) {
       for (int i = 4; i >= 0; i --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int i = 0; i <= 4; i ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -1128,12 +1057,12 @@ void Snake8(int DelaySpeed) {
   for (int i = 4; i >= 0; i--) {
     if ( i % 2 == 0) {
       for (int j = 0; j <= 3; j ++) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     } else {
       for (int j = 3; j >= 0; j --) {
-        TurnOn(ledarray[i][j]);
+        TurnOnOff(ledarray[i][j]);
         delay(DelaySpeed);
       }
     }
@@ -3042,13 +2971,13 @@ void Heart5(int DelaySpeed) {
 //Spiral
 void Spiral1(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
 
   for (int i = 1; i <= 3; i ++) {
-    TurnOn(ledarray[i][2]);
+    TurnOnOff(ledarray[i][2]);
     delay(DelaySpeed);
   }
   /*
@@ -3060,17 +2989,17 @@ void Spiral1(int DelaySpeed) {
     //  delay(DelaySpeed);
   */
 
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
 
   for (int i = 0; i <= 3; i ++) {
-    TurnOn(ledarray[0][i]);
+    TurnOnOff(ledarray[0][i]);
     delay(DelaySpeed);
   }
 
@@ -3086,7 +3015,7 @@ void Spiral1(int DelaySpeed) {
   */
 
   for (int i = 1; i <= 3; i ++) {
-    TurnOn(ledarray[i][3]);
+    TurnOnOff(ledarray[i][3]);
     delay(DelaySpeed);
   }
 
@@ -3100,7 +3029,7 @@ void Spiral1(int DelaySpeed) {
   */
 
   for (int i = 3; i >= 0; i --) {
-    TurnOn(ledarray[4][i]);
+    TurnOnOff(ledarray[4][i]);
     delay(DelaySpeed);
   }
 
@@ -3115,7 +3044,6 @@ void Spiral1(int DelaySpeed) {
     delay(DelaySpeed);
   */
 
-  ChooseRandomClean(DelaySpeed);
 }
 void Spiral1Clean(int DelaySpeed) {
   TurnOff(ledarray[2][1]);
@@ -3161,45 +3089,45 @@ void Spiral1Clean(int DelaySpeed) {
 }
 void Spiral2(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3247,44 +3175,44 @@ void Spiral2Clean(int DelaySpeed) {
 }
 void Spiral3(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][0]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   ChooseRandomClean(DelaySpeed);
 
 }
@@ -3330,45 +3258,45 @@ void Spiral3Clean(int DelaySpeed) {
 }
 void Spiral4(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3416,45 +3344,45 @@ void Spiral4Clean(int DelaySpeed) {
 }
 void Spiral5(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3502,45 +3430,45 @@ void Spiral5Clean(int DelaySpeed) {
 }
 void Spiral6(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3588,45 +3516,45 @@ void Spiral6Clean(int DelaySpeed) {
 }
 void Spiral7(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3674,45 +3602,45 @@ void Spiral7Clean(int DelaySpeed) {
 }
 void Spiral8(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3760,45 +3688,45 @@ void Spiral8Clean(int DelaySpeed) {
 }
 void Spiral9(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3846,45 +3774,45 @@ void Spiral9Clean(int DelaySpeed) {
 }
 void Spiral10(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -3932,46 +3860,46 @@ void Spiral10Clean(int DelaySpeed) {
 }
 void Spiral11(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -4020,46 +3948,46 @@ void Spiral11Clean(int DelaySpeed) {
 }
 void Spiral12(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -4107,45 +4035,45 @@ void Spiral12Clean(int DelaySpeed) {
 }
 void Spiral13(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -4193,45 +4121,45 @@ void Spiral13Clean(int DelaySpeed) {
 }
 void Spiral14(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
@@ -4279,45 +4207,45 @@ void Spiral14Clean(int DelaySpeed) {
 }
 void Spiral15(int DelaySpeed) {
   CleanScreen();
-  TurnOn(ledarray[2][0]);
+  TurnOnOff(ledarray[2][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][0]);
+  TurnOnOff(ledarray[1][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][0]);
+  TurnOnOff(ledarray[0][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][1]);
+  TurnOnOff(ledarray[0][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][2]);
+  TurnOnOff(ledarray[0][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[0][3]);
+  TurnOnOff(ledarray[0][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][3]);
+  TurnOnOff(ledarray[1][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][3]);
+  TurnOnOff(ledarray[2][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][3]);
+  TurnOnOff(ledarray[3][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][3]);
+  TurnOnOff(ledarray[4][3]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][2]);
+  TurnOnOff(ledarray[4][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][1]);
+  TurnOnOff(ledarray[4][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][1]);
+  TurnOnOff(ledarray[3][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][1]);
+  TurnOnOff(ledarray[2][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[2][2]);
+  TurnOnOff(ledarray[2][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[4][0]);
+  TurnOnOff(ledarray[4][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][0]);
+  TurnOnOff(ledarray[3][0]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][1]);
+  TurnOnOff(ledarray[1][1]);
   delay(DelaySpeed);
-  TurnOn(ledarray[1][2]);
+  TurnOnOff(ledarray[1][2]);
   delay(DelaySpeed);
-  TurnOn(ledarray[3][2]);
+  TurnOnOff(ledarray[3][2]);
   delay(DelaySpeed);
   ChooseRandomClean(DelaySpeed);
 }
