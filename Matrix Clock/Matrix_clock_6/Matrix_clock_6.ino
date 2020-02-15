@@ -639,8 +639,8 @@ void setup() {
   lmd.setEnabled(true);
   lmd.setIntensity(0);   // 0 = low, 10 = high
   //pinMode(Button_PIN, INPUT);
-  SetupRTC();
   Serial.begin(57600);
+    SetupRTC();
 
 }
 
@@ -1188,7 +1188,7 @@ void SetupRTC() {
   }
   else if (now > compiled)
   {
-    Serial.println("RTC is newer than compile time. (this is expected)");
+    Serial.println("RTC is newer than compile time. (this is expected)";
   }
   else if (now == compiled)
   {
