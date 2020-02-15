@@ -1,0 +1,108 @@
+Kitul cuprinde piesele necesare pentru construirea unei ma?ini inteligente controlata prin joystick de la distan?a, destinata în principal pentru înva?area programarii cu Arduino. Fiecare pas de montare are o explica?ie grafica clara, a?a ca instalarea este foarte simpla.
+
+Acest kit con?ine un ?asiu PCB compatibil Arduino pe care poate fi u?or instalat o placa de dezvoltare Arduino UNO R3 ATmega328P / OPEN-SMART UNO R3 sau alte placi compatibile.
+
+Motoarele de transmisie ?i suportul pentru baterii au conectorii XH-2.54, astfel încât sa le pute?i conecta direct la soclul alb corespunzator de pe ?asiu.
+
+Kitul va poate ajuta sa înva?a?i programarea cu Arduino ?i sa înva?a?i cum sa face?i proiecte interesante, cum ar fi masurarea ?i afi?area distan?ei cu ultrasunete sau evitarea obstacolelor folosind ultrasunetele.
+
+Aten?ie : Kitul con?ine par?i mici, cum ar fi ?uruburi, piuli?e ?i nituri de nylon, deci va rugam sa-l pastra?i departe de copii sub 6 ani. Ma?ina va fi expediata dezasamblata ?i fara baterii ( sunt necesare 2 baterii LiIon 3.7v 14500 de minim 1000mAh ?i o baterie 3.7v pentru alimentarea joystickului).
+
+ 
+
+Kitul con?ine:
+
+1 x ?asiu auto PCB
+1 x Placa dezvoltare Uno R3
+1 x Cablu USB de 50 cm
+1 x Placa expansiune IO
+1 x Modul senzor cu ultrasunete
+1 x Suport pentru senzor cu ultrasunete
+1 x Telecomanda cu joystick
+1 x Modul receptor RF433
+1 x Modul de afi?are cu 4 cifre
+4 x Motoare de viteza cu cabluri de conectare (15 cm)
+4 x Suport fixare motor
+4 x Ro?i
+1 x Suport baterie 14500
+1 x ?urubelni?a triunghiulara 3 * 75mm
+1 x 40P Cabluri Dupont mama-mama 20cm
+1 x Nit nylon alb (R2672)
+12 x Nit nylon negru (R2064)
+3 x Prinderi de cupru (M3x6 + 6mm)
+3 x ?uruburi de o?el (M3x5)
+3 x Piuli?e din o?el hexagonal (M3 x 2,5)
+Scheama firelor montate pe shield :
+
+ 
+
+2P  --- Scutul de expansiune IO
+
+ 
+
+Firul rosu  in portul VCC
+Firul negru  in portul GND
+ 
+
+Sasiu auto PCB  --- Scutul de expansiune IO
+
+ 
+
+BIN1  in portul D8
+BIN2  in portul  D11
+PWMB  in portul  D9
+AIN1  in portul  D12
+AIN2  in portul  D13
+PWMA  in portul  D10
+ 
+
+ 
+
+Modul receptor RF433  --- Scutul de expansiune IO
+
+ 
+
+SIG in portul D2
+VCC in portul VCC
+GND in portul GND
+Modulul 4-Digit Display  --- Scutul de expansiune IO
+
+ 
+
+CLK  in portul  A5/SCL
+DIO  in portul  A4/SDA
+VCC  in portul  VCC
+GND  in portul  GNDd
+ 
+
+Senzorul cu ultrasunete  --- Scutul de expansiune IO
+
+VCC  in portul  VCC
+Trig  in portul  D5
+Echo  in portul  D3
+GND  in portul  GND
+Pins Configuration:
+
+Receiver -> SIG = D2;
+
+Senzor ultrasonic HC-SR04 -> TRIGGER = D7
+
+                                                  ECHO = D8
+
+Display -> CLK = A5
+
+                  DIO = A4  
+
+Motoare : 
+
+BIN1 - D3
+
+BIN2 - D5
+
+PWMB - D6
+
+AIN1 - D9
+
+AIN2 - D10
+
+PWMA - D11
